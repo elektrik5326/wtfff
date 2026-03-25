@@ -64,4 +64,8 @@ def admin_panel():
         elif request.method == 'GET':
             return render_template('admin.html')
 init_db()
-app.run()
+
+if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
