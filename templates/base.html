@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> {% block title %}{% endblock %}</title>
+    <style>
+        li {
+            padding: 10px;
+            border: solid 1px black;
+            border-radius: 5px 0px;
+        }
+        header {
+            padding: 20px;
+            text-align: center;
+            background-color: darkgoldenrod;
+        }
+        * {
+            font-family: "Montserrat";
+            margin: 0;
+            padding: 0;
+            background-color: whitesmoke;
+        }
+        .container {
+            margin: 10px 15%;
+            width: 80%;
+            padding: 5px;
+        }
+        a {
+            background-color: darkgoldenrod;
+        }
+        input {
+            padding: 5px;
+        }
+        button {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/">Главная</a>
+        <a href="/login">Вход</a>
+        <a href="/adminpanel">Админ-панель</a>
+    </header>
+    <div class="container">
+        {% block main %}
+        {% endblock %}
+    </div>
+</body>
+</html>

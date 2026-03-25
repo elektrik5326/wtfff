@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %} baza pon def {% endblock %}
+
+{% block main %}
+    <ul>
+        {% for int in main %}
+            <li><p>{{- int[1] -}}, Оценка: {{- int[0] -}}<br>Комментарий:  {{- int[2] -}}</p></li>
+        {% else %}
+            <p>Нету оценок</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

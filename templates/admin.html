@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<form method="POST">
+    <input type="number" name="word" placeholder="Введите оценку">
+    <input type="text" name="name" placeholder="Введите имя">
+    <input type="text" name="comm" placeholder="Введите комментарий">
+    <button type="sumbit">Отправить</button>
+</form>
+{% endblock %}
