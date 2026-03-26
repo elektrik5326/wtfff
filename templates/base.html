@@ -7,6 +7,7 @@
             padding: 10px;
             border: solid 1px black;
             border-radius: 5px 0px;
+            margin: 10px;
         }
         header {
             padding: 20px;
@@ -21,7 +22,6 @@
         }
         .container {
             margin: 10px 15%;
-            width: 80%;
             padding: 5px;
         }
         a {
@@ -33,6 +33,18 @@
         button {
             padding: 5px;
         }
+        .container {
+            text-align: center;
+        }
+        a {
+            color: black;
+        }
+        a:visited {
+            color: black;
+        }
+        .not_background_a {
+            background-color: white;
+        }
     </style>
 </head>
 <body>
@@ -40,6 +52,7 @@
         <a href="/">Главная</a>
         <a href="/login">Вход</a>
         <a href="/adminpanel">Админ-панель</a>
+        <a href="/developerpanel">Панель владельца</a>
     </header>
     <div class="container">
         {% block main %}
