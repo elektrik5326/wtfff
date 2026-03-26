@@ -11,8 +11,9 @@
         }
         header {
             padding: 20px;
-            text-align: center;
             background-color: darkgoldenrod;
+            display: flex;
+            justify-content: space-between
         }
         * {
             font-family: "Montserrat";
@@ -24,9 +25,7 @@
             margin: 10px 15%;
             padding: 5px;
         }
-        a {
-            background-color: darkgoldenrod;
-        }
+
         input {
             padding: 5px;
         }
@@ -38,6 +37,7 @@
         }
         a {
             color: black;
+            padding: 5px;
         }
         a:visited {
             color: black;
@@ -45,14 +45,34 @@
         .not_background_a {
             background-color: white;
         }
+        .link {
+            background-color: darkgoldenrod;
+        }
+        .role p {
+            background-color: darkgoldenrod;
+            padding: 5px;
+        }
+        .empty {
+            width: 100px; 
+            background-color: darkgoldenrod;
+        }
+        .link a {
+            background-color: darkgoldenrod;
+        }
     </style>
 </head>
 <body>
     <header>
-        <a href="/">Главная</a>
-        <a href="/login">Вход</a>
-        <a href="/adminpanel">Админ-панель</a>
-        <a href="/developerpanel">Панель владельца</a>
+        <div class="role">
+            <p style="color : block">Ваша роль: {{ role }}</p>
+        </div>
+        <div class="link">
+            <a href="/" id="link">Главная</a>
+            <a href="/login" id="link">Вход</a>
+            <a href="/adminpanel" id="link">Админ-панель</a>
+            <a href="/developerpanel" id="link">Панель владельца</a>
+        </div>
+        <div class="empty"></div>
     </header>
     <div class="container">
         {% block main %}
