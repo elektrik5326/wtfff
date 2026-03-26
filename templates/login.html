@@ -4,8 +4,15 @@
 
 {% block main %}
     <form method="POST">
-        <input type="number" name="password" placeholder="Введите пароль"></input>
-        <button type="submit">Отправить</button>
+        <h1>Вход в админ-панель</h1>
+        <input type="number" name="password" placeholder="Введите пароль">
+        <button type="submit" value="admin" name="sumbit">Отправить</button>
         <p>Пароль: 1234</p>
+        <p> {{ result }}</p>
+        <br>
+        <h1>Вход в панель владельца</h1>
+        <input type="number" name="pass" placeholder="Введите пароль">
+        <button type="submit" value="developer" name="sumbit">Отправить</button>
+        <p>{{ result_develop }}</p>
     </form>
 {% endblock %}
