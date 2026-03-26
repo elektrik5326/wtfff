@@ -5,8 +5,23 @@ is_admin = False
 is_developer = False
 result = ""
 result_develop = ""
+role = None
 
 app = Flask(__name__)
+
+def role_user():
+    global is_admin
+    global is_developer
+    global role
+
+    if is_developer == True:
+        role = 'Владелец'
+        is_admin = True
+    elif is_admin == True and is_developer == False:
+        role = 'Админ'
+    else:
+        role = 'Гость'
+
 def init_db():
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
@@ -22,12 +37,14 @@ def add_data(word,comm,name):
     conn.close()
 
 @app.route('/login', methods=['POST', 'GET'])
-def main():
+def login():
     global result_develop
     global result
     global is_admin
     global is_developer
+    global role
 
+    role_user()
 
     if request.method == 'POST':
         name = request.form.get('password')
@@ -38,6 +55,7 @@ def main():
                 is_admin = True
                 result = 'Вы успешно вошли, теперь вам доступна админ-панель'
                 result_develop = ""
+                role_user()
             else:
                 result = 'Вы не вошли, пароль: 1234'
                 result_develop = ""
@@ -46,26 +64,35 @@ def main():
                 is_developer = True
                 result_develop = 'Вы успешно вошли'
                 result = ""
+                role_user()
             else:
                 result = ""
                 result_develop = 'Вы не вошли'
 
-    return render_template('login.html', result=result, result_develop=result_develop)
+    return render_template('login.html', result=result, result_develop=result_develop, role=role)
 
 @app.route('/', methods=['POST', 'GET'])
 def users():
+    global role
+
+    role_user()
+
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
     c.execute('SELECT *, rowid FROM main')
     data = c.fetchall()
 
-    return render_template('index.html', main=data, is_developer=is_developer)
+    return render_template('index.html', main=data, is_developer=is_developer, role=role)
 
 @app.route('/adminpanel', methods=['POST', 'GET'])
 def admin_panel():
+    global role
     global is_admin
+
+    role_user()
+
     if is_admin == False:
-        return render_template('notadmin.html')
+        return render_template('notadmin.html', role=role)
     elif is_admin == True:
         if request.method == 'POST':
             word = int(request.form.get('word'))
@@ -86,14 +113,18 @@ def admin_panel():
                 c.execute(f'INSERT INTO main (data,name,comment) VALUES ("{word}","{name}","{comm}")')
                 conn.commit()
                 conn.close()
-                return render_template('admin.html')
+                return render_template('admin.html', role=role)
         elif request.method == 'GET':
-            return render_template('admin.html')
+            return render_template('admin.html', role=role)
         
 @app.route('/developerpanel', methods=['POST','GET'])
 def developer():
+    global role
+
+    role_user()
+
     if is_developer == False:
-        return render_template('notadmin.html')
+        return render_template('notadmin.html', role=role)
     else:
         btn = request.form.get('btn')
         text = request.form.get('rowid')
@@ -105,7 +136,8 @@ def developer():
             conn.commit()
             conn.close()
             result_all = 'Все очищено'
-            return render_template('developer.html', result_all=result_all)
+
+            return render_template('developer.html', result_all=result_all, result_rowid='', role=role)
         elif btn == 'value1':
             conn = sqlite3.connect('data.db')
             c = conn.cursor()
@@ -114,9 +146,10 @@ def developer():
             conn.close()
             
             result_rowid = f'Успешно удалено сообщение по ID = {text}'
-            return render_template('developer.html',result_rowid=result_rowid)
-        return render_template('developer.html')
+
+            return render_template('developer.html',result_rowid=result_rowid, role=role, result_all='')
+        return render_template('developer.html', role=role)
     
 init_db()
 
-# Render fix
+#for @vood65
