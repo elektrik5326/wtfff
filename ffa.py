@@ -118,4 +118,3 @@ def developer():
         return render_template('developer.html')
     
 init_db()
-app.run()
