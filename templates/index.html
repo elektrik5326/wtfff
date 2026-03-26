@@ -3,11 +3,22 @@
 {% block title %} baza pon def {% endblock %}
 
 {% block main %}
+    <div class="container">
+        <h3>Заспамьте @vood65 тг чтоб не втыкал</h3>
+    </div>
+    <div class="container">
     <ul>
         {% for int in main %}
-            <li><p>{{- int[1] -}}, Оценка: {{- int[0] -}}<br>Комментарий:  {{- int[2] -}}</p></li>
+            {% if is_developer == False: %}
+                <li><p>{{- int[1] -}}, Оценка: {{- int[0] -}}<br>Комментарий:  {{- int[2] -}}</p></li>
+
+            {% elif is_developer == True: %}
+                <li><p>{{- int[1] -}}, Оценка: {{- int[0] -}},  ID = {{ int[3] }}<br>Комментарий:  {{- int[2] -}}</p></li>
+            {% endif %}
         {% else %}
-            <p>Нету оценок</p>
+            <p>Нету тут ничего</p>
+
         {% endfor %}
     </ul>
+    </div>
 {% endblock %}
