@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Панель владельца{% endblock %}
+
+{% block main %}
+<form method="POST">
+    <button type="sumbit" value="value" name="btn">Очистить все</button>
+    <input type="number" name="rowid" placeholder="ID">
+    <button type="sumbit" value="value1" name="btn">Отчистить по ID</button>
+    <p>{{ result_rowid }}</p>
+</form>
+{% endblock %}
